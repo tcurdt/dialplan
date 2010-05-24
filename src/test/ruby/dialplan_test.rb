@@ -1,24 +1,29 @@
-require File.expand_path(File.dirname(__FILE__) + '/test_helper')
-
-require 'dialingplan'
+$:.unshift File.expand_path("../../main/ruby")
+require 'test_helper'
+require 'dialplan'
 
 class PhoneNumberTest < Test::Unit::TestCase
 
-  def setup
-  end
+  def test_number_conversion
+    
+    path = File.expand_path(File.dirname(__FILE__) + '/../../../' + 'dialplan.yaml')
 
-  def test_should_work
-    path = File.expand_path(File.dirname(__FILE__) + '/../../../' + 'countries.yaml')
+    plan = DialPlan::DialPlan.new(path)
 
-    # [plan internationalizeNumber:@"1111" forCode:@"+49"]
-    # [plan internationalizeNumber:@"0179" forCode:@"+49"]
-    # [plan internationalizeNumber:@"+49179" forCode:@"+49"]
-    # [plan internationalizeNumber:@"0049179" forCode:@"+49"]
-    # [plan internationalizeNumber:@"0015551234" forCode:@"+49"]
-    # [plan internationalizeNumber:@"+15551234" forCode:@"+49"]
-    # [plan internationalizeNumber:@"01149179" forCode:@"+1"]
-    # [plan internationalizeNumber:@"+49179" forCode:@"+1"]
-    # [plan internationalizeNumber:@"5551234" forCode:@"+1"]
+    country = plan.country('+49')
+    
+    assert_equal '+491111', country.internationalizeNumber('1111')
+    assert_equal '+49179', country.internationalizeNumber('0179')
+    assert_equal '+49179', country.internationalizeNumber('+49179')
+    assert_equal '+49179', country.internationalizeNumber('0049179')
+    assert_equal '+15551234', country.internationalizeNumber('0015551234')
+    assert_equal '+15551234', country.internationalizeNumber('+15551234')
+    
+    country = plan.country('+1')
+
+    assert_equal '+49179', country.internationalizeNumber('01149179')
+    assert_equal '+49179', country.internationalizeNumber('+49179')
+    assert_equal '+15551234', country.internationalizeNumber('5551234')
     
   end
 

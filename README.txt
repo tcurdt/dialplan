@@ -16,7 +16,9 @@ The second part of the project are the APIs to make use of the data. So far ther
  
  o Ruby
 
-    TBD
+    plan = DialPlan::DialPlan.new(path)
+    country = plan.country('+49')    
+    assert_equal '+49179', country.internationalizeNumber('0179')
 
 Given that you know where you are they let you convert between local numbers and the international representation.
 
