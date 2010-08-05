@@ -33,4 +33,4 @@ All code and data is released under the Apache License 2.0.
 
 # Related projects
 
-* http://code.google.com/p/libphonenumber
+* [libphonenumber](http://code.google.com/p/libphonenumber)
