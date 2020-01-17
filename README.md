@@ -34,3 +34,4 @@ All code and data is released under the Apache License 2.0.
 # Related projects
 
 * [libphonenumber](http://code.google.com/p/libphonenumber)
+* [countries](https://github.com/biter777/countries)
